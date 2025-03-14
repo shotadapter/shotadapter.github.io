@@ -1,0 +1,1 @@
+# shotadapter.github.io
