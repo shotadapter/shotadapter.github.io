@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
+  <!-- Replace the content tag with appropriate information -->
+  <meta name="description" content="ShotAdapter enables text-to-multi-shot video generation with minimal fine-tuning, providing users control over shot number, duration, and content through shot-specific text prompts, along with a multi-shot video dataset collection pipeline.">
+  <meta property="og:title" content="ShotAdapter: Text-to-Multi-Shot Video Generation with Diffusion Models"/>
+  <meta property="og:description" content="ShotAdapter enables text-to-multi-shot video generation with minimal fine-tuning, providing users control over shot number, duration, and content through shot-specific text prompts, along with a multi-shot video dataset collection pipeline."/>
+  <meta property="og:url" content="https://shotadapter.github.io/"/>
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X630-->
+  <meta property="og:image" content="static/image/your_banner_image.png" />
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+
+
+  <meta name="twitter:title" content="ShotAdapter: Text-to-Multi-Shot Video Generation with Diffusion Models">
+  <meta name="twitter:description" content="ShotAdapter enables text-to-multi-shot video generation with minimal fine-tuning, providing users control over shot number, duration, and content through shot-specific text prompts, along with a multi-shot video dataset collection pipeline.">
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X600-->
+  <meta name="twitter:image" content="static/images/your_twitter_banner_image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- Keywords for your paper to be indexed by-->
+  <meta name="keywords" content="Text2Video, Video Generation, Stable Diffusion">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <title>ShotAdapter: Text-to-Multi-Shot Video Generation with Diffusion Models</title>
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+  rel="stylesheet">
+
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <link rel="stylesheet" href="static/css/glide.core.min.css">
+  <link rel="stylesheet" href="static/css/glide.theme.min.css">
+  <link rel="stylesheet" href="static/css/glide-custom.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script src="static/js/bulma-carousel.min.js"></script>
+  <script src="static/js/bulma-slider.min.js"></script>
+  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+	    tex2jax: {
+	        inlineMath: [['$','$'], ['\\(','\\)']],
+	        processEscapes: true
+	    }
+	});
+    </script>
+  <script src="static/js/index.js"></script>
+</head>
+<body>
+
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="xtitle is-1 publication-title" style="    font-size: 200%; font-weight: 800;">ShotAdapter: Text-to-Multi-Shot Video Generation with Diffusion Models</h1>
+            <div class="is-size-5 publication-authors">
+              <!-- Paper authors -->
+              <span class="author-block"><a href="https://karaozgur.com/" target="_blank">Ozgur Kara</a><sup>1,2</sup></span>
+              <span class="author-block"><a href="https://krsingh.cs.ucdavis.edu/" target="_blank">Krishna Kumar Singh</a><sup>2</sup></span>
+              <span class="author-block"><a href="https://scholar.google.com/citations?user=uiqXutMAAAAJ&hl=en" target="_blank">Feng Liu</a><sup>2</sup></span>
+              <span class="author-block"><a href="https://scholar.google.ch/citations?user=56Kj2QoAAAAJ&hl=en" target="_blank">Duygu Ceylan</a><sup>2</sup></span>
+              <span class="author-block"><a href="https://scholar.google.com/citations?user=8kA3eDwAAAAJ&hl=en" target="_blank">James Matthew Rehg</a><sup>1</sup></span>
+              <span class="author-block"><a href="https://www.tobiashinz.com/" target="_blank">Tobias Hinz</a><sup>2</sup></span>
+            </div>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block"><sup>1</sup>University of Illinois Urbana-Champaign</span>
+              <span class="author-block"><sup>2</sup>Adobe</span>
+            </div>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">CVPR 2025</span>
+            </div>
+
+            <div class="column has-text-centered">
+               <div class="publication-links">
+                <!--<span class="link-block">
+                  <a href="static/pdfs/RAVE.pdf" target="_blank"
+                  class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span> -->
+
+              <span class="link-block">
+                <a href="supp/supp.html" target="_blank"
+                class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                  <i class="fas fa-file-pdf"></i>
+                </span>
+                <span>Click for More Qualitative Results</span>
+              </a>
+            </span>
+
+            <!-- Github link -->
+            <!-- <span class="link-block">
+              <a href="https://github.com/RehgLab/RAVE" target="_blank"
+              class="external-link button is-normal is-rounded is-dark">
+              <span class="icon">
+                <i class="fab fa-github"></i>
+              </span>
+              <span>Code</span>
+            </a>
+          </span> -->
+
+          <!-- <span class="link-block">
+            <a href="https://drive.google.com/file/d/1-AjMWn2h7PsLxrvp7evgGXVwaYwVNeF2/view?usp=sharing" target="_blank"
+            class="external-link button is-normal is-rounded is-dark">
+            <span class="icon">
+              <i class="fa fa-database"></i>
+            </span>
+            <span>Dataset</span>
+          </a>
+        </span> -->
+
+          <!-- Huggingface link -->
+          <!-- <span class="link-block">
+            <a href="https://huggingface.co/spaces/ozgurkara/RAVE" target="_blank"
+            class="external-link button is-normal is-rounded is-dark">
+            <span class="icon">
+              <img src="static/images/hf-logo.svg" alt="Huggingface logo" width="20" height="20">
+            </span>
+            <span>Demo</span>
+            </a>
+          </span> -->
+
+          <!-- ArXiv abstract Link -->
+          <!-- <span class="link-block">
+            <a href="https://arxiv.org/abs/2312.04524" target="_blank"
+              class="external-link button is-normal is-rounded is-dark">
+            <span class="icon">
+              <i class="ai ai-arxiv"></i>
+            </span>
+            <span>arXiv</span> -->
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<div class="container" style="margin-bottom: 3rem; display: flex; justify-content: center; align-items: center;" id="container">
+  <div class="teaser">
+      <video width="500" muted loop controls autoplay defaultMuted playsinline webkit-playsinline class="teaser-video-0">
+        <source src="static/teaser/shotadapter-demo.mp4"  type="video/mp4"/>
+      </video>
+  </div>
+</div>
+
+<!-- End Glider -->
+
+<!-- Paper abstract -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths" style="width: 100%;">
+        <h2 class="title is-3 hr-lines">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Current diffusion-based text-to-video methods are limited to producing short video clips of a single shot and lack the capability to generate multi-shot videos with discrete transitions where the same character performs distinct activities across the same or different backgrounds. To address this limitation we propose a framework that includes a dataset collection pipeline and architectural extensions to video diffusion models to enable text-to-multi-shot video generation. Our approach enables generation of multi-shot videos as a single video with full attention across all frames of all shots, ensuring character and background consistency, and allows users to control the number, duration, and content of shots through shot-specific conditioning. This is achieved by incorporating a transition token into the text-to-video model to control at which frames a new shot begins and a local attention masking strategy which controls the transition token's effect and allows shot-specific prompting. To obtain training data we propose a novel data collection pipeline to construct a multi-shot video dataset from existing single-shot video datasets. Extensive experiments demonstrate that fine-tuning a pre-trained text-to-video model for a few thousand iterations is enough for the model to subsequently be able to generate multi-shot videos with shot-specific control, outperforming the baselines.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End paper abstract -->
+
+
+
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-">
+          <h2 class="title is-3 hr-lines">Methodology</h2>
+          <div class="content has-text-justified">
+        
+      <table width="800" border="0">
+        <tbody>
+          <tr>
+            <td colspan="3">
+              <p>
+                (a) ShotAdapter fine-tunes a pre-trained T2V model by incorporating "transition tokens" (highlighted in light blue). We use n-1 transition tokens, initialized as learnable parameters, alongside an n-shot video with shot-specific prompts, which are fed through the pre-trained T2V model. (b) The model processes the concatenated input token sequence, guided by a "local attention mask" through joint attention layers within DiT blocks. (c) The local attention mask is structured to ensure that transition tokens interact only with the visual frames where transitions occur, while each textual token interacts exclusively with its corresponding visual tokens.          </tr>
+            <img src="static/images/model_architecture.png" alt="model_overview"/>
+        </tbody>
+      </table>
+      </div>
+      </div>
+</section>
+
+<!-- Paper poster -->
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-">
+          <h2 class="title is-3 hr-lines">Dataset Collection</h2>
+          <div class="content has-text-justified">
+        
+      <table width="800" border="0">
+        <tbody>
+          <tr>
+            <td colspan="3">
+              <p>
+                A high-level overview of this pipeline is presented in (a). Our first method (gray box in (b)) samples videos with large motion, randomly splits them into n-shots with varied durations, and concatenates them into multi-shot videos. Our second method (yellow box in (b)) randomly samples n videos from pre-clustered groups containing videos of the same identities and concatenates them to form a multi-shot video. Finally, we post-process (c) the multi-shot videos to ensure identity consistency and obtain shot-specific captions using LLaVA-NeXT.            </td>
+          </tr>
+            <img src="static/images/data_collection.png" alt="model_overview"/>
+        </tbody>
+      </table>
+      </div>
+      </div>
+</section>
+<!--End paper poster -->
+
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-">
+          <h2 class="title is-3 hr-lines">Qualitative Results</h2>
+          <div class="content has-text-justified">
+        
+      <table width="800" border="0">
+        <tbody>
+          <tr>
+            <td colspan="3">
+              <p>
+                Here we include the complete videos of the examples shown in Figure 1 (teaser) and Figure 5 (qualitative results) of the main paper. We also provide additional multi-shot video and text pairs grouped based on the number of shots being generated.
+You can find examples where background consistency is maintained across shots (e.g. generated 4-shot video), as well as examples where the background changes (e.g. generated 3-shot video) between shots.
+Generated 2-, 3-, and 4-Shot Video Results with ShotAdapter (each row displays 1 generated multi-shot video). Each shot is displayed separately in the columns following the first column.</h2>
+
+For more results please refer to the <a href="supp/supp.html">supplementary material.</a>
+ <!-- put a href link of supp.html  -->
+
+</tr>
+
+        </tbody>
+      </table>
+      <table width="1200" align="left">
+        <tbody>
+          <tr>
+            <th style="font-size: 16px; width: 240px; text-align: center;">Generated 2-shot Video</th>
+            <th style="font-size: 16px; width: 240px; text-align: center;">
+              <span style="color: greenyellow;">Shot-1 Prompt:</span> "a young girl paints at an easel in her bedroom"
+          </th>
+          
+            <th style="font-size: 16px; width: 240px; text-align: center;">
+              <span style="color: greenyellow;">Shot-2 Prompt:</span> "she then reads a comic book in her bed"
+            </th>
+            <th style="font-size: 16px; width: 240px;"></th>
+            <th style="font-size: 16px; width: 240px;"></th>
+          </tr>
+          <tr>
+            <td style="text-align: left;">
+              <a href="supp/videos/qual_results/2-shot/2-shot.mp4">
+                <video width="240" src="supp/videos/qual_results/2-shot/2-shot.mp4" autoplay loop controls muted></video>
+              </a>
+            </td>
+            <td style="text-align: left;">
+              <a href="supp/videos/qual_results/2-shot/2-shot-1.mp4">
+                <video width="240" src="supp/videos/qual_results/2-shot/2-shot-1.mp4" autoplay loop controls muted></video>
+              </a>
+            </td>
+            <td style="text-align: left;">
+              <a href="supp/videos/qual_results/2-shot/2-shot-2.mp4">
+                <video width="240" src="supp/videos/qual_results/2-shot/2-shot-2.mp4" autoplay loop controls muted></video>
+              </a>
+            </td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+      
+          </tr>
+        </tbody>
+      </table>
+      
+      
+      <table width="1200" align="left">
+        <tbody>
+          <tr>
+            <th style="font-size: 16px; width: 240px; text-align: center;">Generated 3-shot Video</th>
+            <th style="font-size: 16px; width: 240px; text-align: center;">
+              <span style="color: greenyellow;">Shot-1 Prompt:</span> "a man sketches in a notebook at a quiet cafe, his hand moving quickly across the page"
+            </th>
+            <th style="font-size: 16px; width: 240px; text-align: center;">
+              <span style="color: greenyellow;">Shot-2 Prompt:</span> "he pauses, looking up thoughtfully before continuing his drawing"
+            </th>
+            <th style="font-size: 16px; width: 240px; text-align: center;">
+              <span style="color: greenyellow;">Shot-3 Prompt:</span> "later, the man steps outside, his notebook tucked under his arm as he takes in the city around him"
+            </th>
+            <th style="font-size: 16px; width: 240px;"></th>
+          </tr>
+          <tr>
+            <td style="text-align: left;">
+              <a href="supp/videos/qual_results/3-shot/3-shot.mp4">
+                <video width="240" src="supp/videos/qual_results/3-shot/3-shot.mp4" autoplay loop controls muted></video>
+              </a>
+            </td>
+            <td style="text-align: left;">
+              <a href="supp/videos/qual_results/3-shot/3-shot-1.mp4">
+                <video width="240" src="supp/videos/qual_results/3-shot/3-shot-1.mp4" autoplay loop controls muted></video>
+              </a>
+            </td>
+            <td style="text-align: left;">
+              <a href="supp/videos/qual_results/3-shot/3-shot-2.mp4">
+                <video width="240" src="supp/videos/qual_results/3-shot/3-shot-2.mp4" autoplay loop controls muted></video>
+              </a>
+            </td>
+          </td>
+          <td style="text-align: left;">
+            <a href="supp/videos/qual_results/3-shot/3-shot-3.mp4">
+              <video width="240" src="supp/videos/qual_results/3-shot/3-shot-3.mp4" autoplay loop controls muted></video>
+            </a>
+          </td>
+            <td></td>
+          </tr>
+          <tr>
+      
+          </tr>
+        </tbody>
+      </table>
+      
+      <table width="1200" align="left">
+        <tbody>
+          <tr>
+            <th style="font-size: 16px; width: 240px; text-align: center;">Generated 4-shot Video</th>
+            <th style="font-size: 16px; width: 240px; text-align: center;">
+              <span style="color: greenyellow;">Shot-1 Prompt:</span> "scientist in lab coat examines a specimen"
+            </th>
+            <th style="font-size: 16px; width: 240px; text-align: center;">
+              <span style="color: greenyellow;">Shot-2 Prompt:</span> "she writes notes on a clipboard"
+            </th>
+            <th style="font-size: 16px; width: 240px; text-align: center;">
+              <span style="color: greenyellow;">Shot-3 Prompt:</span> "she adjusts dials on a machine"
+            </th>
+            <th style="font-size: 16px; width: 240px; text-align: center;">
+              <span style="color: greenyellow;">Shot-4 Prompt:</span> "she pours a liquid into a beaker"
+            </th>
+          </tr>
+          <tr>
+            <td style="text-align: left;">
+              <a href="supp/videos/qual_results/4-shot/4-shot.mp4">
+                <video width="240" src="supp/videos/qual_results/4-shot/4-shot.mp4" autoplay loop controls muted></video>
+              </a>
+            </td>
+            <td style="text-align: left;">
+              <a href="supp/videos/qual_results/4-shot/4-shot-1.mp4">
+                <video width="240" src="supp/videos/qual_results/4-shot/4-shot-1.mp4" autoplay loop controls muted></video>
+              </a>
+            </td>
+            <td style="text-align: left;">
+              <a href="supp/videos/qual_results/4-shot/4-shot-2.mp4">
+                <video width="240" src="supp/videos/qual_results/4-shot/4-shot-2.mp4" autoplay loop controls muted></video>
+              </a>
+            </td>
+          </td>
+          <td style="text-align: left;">
+            <a href="supp/videos/qual_results/4-shot/4-shot-3.mp4">
+              <video width="240" src="supp/videos/qual_results/4-shot/4-shot-3.mp4" autoplay loop controls muted></video>
+            </a>
+          </td>
+          <td style="text-align: left;">
+            <a href="supp/videos/qual_results/4-shot/4-shot-4.mp4">
+              <video width="240" src="supp/videos/qual_results/4-shot/4-shot-4.mp4" autoplay loop controls muted></video>
+            </a>
+          </td>
+          </tr>
+          <tr>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+      </div>
+</section>
+
+
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-">
+          <h2 class="title is-3 hr-lines">Comparison</h2>
+          <div class="content has-text-justified">
+        
+            <span style="color: greenyellow;">Shot-1 Prompt:</span> "a man reads a book under tree" <br>
+            <span style="color: greenyellow;">Shot-2 Prompt:</span> "a man walks from the forest towards lake"
+      <table width="1200" align="left">
+        <tbody>
+          <tr>
+            <th style="font-size: 16px; width: 240px; text-align: center;">ShotAdapter</th>
+            <th style="font-size: 16px; width: 240px; text-align: center;">
+              MEVG [1]
+            </th>
+            <th style="font-size: 16px; width: 240px; text-align: center;">
+              FreeNoise [2]
+            </th>
+            <th style="font-size: 16px; width: 240px; text-align: center;">
+              Gen-L-Video [3]
+            </th>
+            <th style="font-size: 16px; width: 240px; text-align: center;">
+              SEINE [4]
+            </th>
+          </tr>
+          <tr>
+            <td style="text-align: left;">
+              <a href="static/vids/ours_vid2.mp4">
+                <video width="240" src="static/vids/ours_vid2.mp4" autoplay loop controls muted></video>
+              </a>
+            </td>
+            <td style="text-align: left;">
+              <a href="static/vids/mevg_vid2.mp4">
+                <video width="240" src="static/vids/mevg_vid2.mp4" autoplay loop controls muted></video>
+              </a>
+            </td>
+            <td style="text-align: left;">
+              <a href="static/vids/freenoise_vid2.mp4">
+                <video width="240" src="static/vids/freenoise_vid2.mp4" autoplay loop controls muted></video>
+              </a>
+            </td>
+          </td>
+          <td style="text-align: left;">
+            <a href="static/vids/genl_vid2.mp4">
+              <video width="240" src="static/vids/genl_vid2.mp4" autoplay loop controls muted></video>
+            </a>
+          </td>
+          <td style="text-align: left;">
+            <a href="static/vids/seine_vid2.mp4">
+              <video width="240" src="static/vids/seine_vid2.mp4" autoplay loop controls muted></video>
+            </a>
+          </td>
+          </tr>
+          <tr>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+      </div>
+</section>
+
+
+
+<!--BibTex citation -->
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h2 class="title">BibTeX</h2>
+      <pre><code>@inproceedings{kara2025shotadapter,
+  title={ShotAdapter: Text-to-Multi-Shot Video Generation with Diffusion Models},
+  author={Ozgur Kara and Krishna Kumar Singh and Feng Liu and Duygu Ceylan and James M. Rehg and Tobias Hinz},
+  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
+  year={2025}
+}</code></pre>
+    </div>
+</section>
+<!--End BibTex citation -->
+
+
+
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column custom-width">
+          <!-- <h2 class="title is-3"></h2> -->
+          <div class="content has-text-justified">
+            <p>
+              <a name="ref-tokenflow" id="ref-tokenflow"></a>
+              [1] Oh, G., Jeong, J., Kim, S., Byeon, W., Kim, J., Kim, S., & Kim, S. (2024, September). Mevg: Multi-event video generation with text-to-video models. In European Conference on Computer Vision (pp. 401-418). Cham: Springer Nature Switzerland.
+            </p>
+            <p>
+              <a name="ref-fatezero" id="ref-fatezero"></a>
+              [2] Qiu, H., Xia, M., Zhang, Y., He, Y., Wang, X., Shan, Y., & Liu, Z. (2024). FreeNoise: Tuning-Free Longer Video Diffusion via Noise Rescheduling. The Twelfth International Conference on Learning Representations. Retrieved from https://openreview.net/forum?id=ijoqFqSC7p
+            </p>
+            <p>
+              <a name="ref-rerender" id="ref-rerender"></a>
+              [3] Wang, F. Y., Chen, W., Song, G., Ye, H. J., Liu, Y., & Li, H. (2023). Gen-l-video: Multi-text to long video generation via temporal co-denoising. arXiv preprint arXiv:2305.18264.
+            </p>
+            <p>
+              <a name="ref-t2v" id="ref-t2v"></a>
+              [4] Chen, X., Wang, Y., Zhang, L., Zhuang, S., Ma, X., Yu, J., ... & Liu, Z. (2023, October). Seine: Short-to-long video diffusion model for generative transition and prediction. In The Twelfth International Conference on Learning Representations.
+            </p>
+        </div>
+      </div>
+    </div>  
+</section>
+
+
+  <footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+
+          <p>
+            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a>.
+            You are free to borrow the of this website, we just ask that you link back to this page in the footer. <br> This website is licensed under a <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+
+<a href="https://clustrmaps.com/site/1c4wj" title="ClustrMaps"><img src="//www.clustrmaps.com/map_v2.png?d=71GfT4klwD9MnbJgI2F6Uz_LRwFkKb7I2aM1juOKF9s&cl=ffffff" width="0px"/></a>
+  </body>
+  </html>
